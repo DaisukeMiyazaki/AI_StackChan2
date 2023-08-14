@@ -80,7 +80,7 @@ ESP32WebServer server(80);
 String OPENAI_API_KEY = "";
 String VOICEVOX_API_KEY = "";
 String STT_API_KEY = "";
-String TTS_SPEAKER_NO = "3";
+String TTS_SPEAKER_NO = "42";
 String TTS_SPEAKER = "&speaker=";
 String TTS_PARMS = TTS_SPEAKER + TTS_SPEAKER_NO;
 //---------------------------------------------
@@ -299,7 +299,7 @@ String https_post_json(const char* url, const char* json_string, const char* roo
 String chatGpt(String json_string) {
   String response = "";;
   avatar.setExpression(Expression::Doubt);
-  avatar.setSpeechText("考え中…");
+  avatar.setSpeechText("...");
   String ret = https_post_json("https://api.openai.com/v1/chat/completions", json_string.c_str(), root_ca_openai);
   avatar.setExpression(Expression::Neutral);
   avatar.setSpeechText("");
@@ -836,7 +836,7 @@ String SpeechToText(bool isGoogle){
     audio->Record();  
     Serial.println("Record end\r\n");
     Serial.println("音声認識開始");
-    avatar.setSpeechText("わかりました");  
+    avatar.setSpeechText("....");  
     Whisper* cloudSpeechClient = new Whisper(root_ca_openai, OPENAI_API_KEY.c_str());
     ret = cloudSpeechClient->Transcribe(audio);
     delete cloudSpeechClient;
